@@ -1,0 +1,12 @@
+{
+  "name": "tabuada-rapida",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Jogo de celular (PWA) para memorizar a tabuada com repetição espaçada.",
+  "scripts": {
+    "start": "node tools/serve.js",
+    "test": "node --test tests/multiplication.test.js tests/scheduler.test.js",
+    "simulate": "node tests/simulate.js"
+  },
+  "engines": { "node": ">=18" }
+}
