@@ -41,14 +41,14 @@ Estas são as observações, a maioria vinda de jogar o protótipo, que viraram 
 | Repetir a mesma conta 10 vezes no mesmo dia dá uma falsa sensação de que já sabe | A conta só sobe de nível quando a revisão marcada vence ([ADR-0003](adr/0003-repeticao-espacada.md)) |
 | **"Demoro em 9×6 porque calculo 9×5+9"** | O tempo de resposta conta. Acerto lento não vale como "de cor", e a conta continua aparecendo |
 | Um limite fixo (3,5 s) é injusto: cada pessoa tem um ritmo para ler e tocar | Limite **pessoal**, aprendido com seus acertos mais rápidos ([ADR-0005](adr/0005-limite-de-tempo-pessoal.md)) |
-| Saber o que o jogo percebeu motiva | O resultado mostra as contas que "demorou", e o progresso mostra o seu tempo de referência |
+| Ver "demorou" em toda rodada frustra, mesmo respondendo rápido | A lentidão é medida e usada pelo algoritmo, mas não aparece na tela |
 | O foco agora é multiplicação, mas o plano é expandir | Geradores plugáveis: o algoritmo não sabe que conta é ([ADR-0006](adr/0006-geradores-plugaveis.md)) |
 
 ## Como medir se está funcionando
 
 - **Cobertura:** quantas das 55 contas já foram vistas. A meta é todas em poucas semanas de uso diário.
 - **Domínio:** quantas contas estão "de cor", ou seja, com revisão a cada 7 dias ou mais.
-- **Velocidade:** o tempo de referência pessoal deve cair, e a lista de contas "calculando" deve diminuir.
+- **Velocidade:** o tempo de referência pessoal deve cair, e a quantidade de acertos lentos (medida por dentro, não mostrada) deve diminuir.
 - **Retenção:** contas "de cor" continuam sendo acertadas rápido nas revisões de 2 semanas e 1 mês.
 
 A simulação (`npm run simulate`) dá uma estimativa disso com jogadores virtuais. Os números reais virão do uso.

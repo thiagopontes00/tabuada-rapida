@@ -50,7 +50,6 @@
       session: sched.startSession(),
       score: 0, right: 0, total: 0, streak: 0, bestStreak: 0,
       missed: new Map(), // contas erradas
-      slow: new Map(),   // contas certas, mas demoradas (calculadas)
       question: null, shownAt: 0, timer: null, endAt: 0,
     };
     show('game');
@@ -93,8 +92,8 @@
       G.right++;
       G.streak++;
       G.bestStreak = Math.max(G.bestStreak, G.streak);
+      // A lentidão ("calculando") só influencia o algoritmo e o bônus de pontos; não é mostrada ao jogador.
       G.score += 10 + Math.min(G.streak - 1, 10) * 2 + (slow ? 0 : 5);
-      if (slow) G.slow.set(q.text, q.answer);
       button.classList.add('ok');
     } else {
       G.streak = 0;
@@ -161,16 +160,14 @@
 
     const missed = $('#resMissed');
     missed.innerHTML = '';
-    const addTag = (text, answer, note) => {
+    g.missed.forEach((answer, text) => {
       const t = document.createElement('span');
       t.className = 'tag';
-      t.innerHTML = `${text} = ${answer}` + (note ? ` <small class="muted">${note}</small>` : '');
+      t.textContent = `${text} = ${answer}`;
       missed.appendChild(t);
-    };
-    g.missed.forEach((answer, text) => addTag(text, answer, ''));
-    g.slow.forEach((answer, text) => { if (!g.missed.has(text)) addTag(text, answer, 'demorou'); });
+    });
     $('#resMissedTitle').textContent =
-      missed.children.length ? 'Para revisar' : (g.total ? 'Nenhum erro, tudo respondido de cabeça.' : '');
+      missed.children.length ? 'Para revisar' : (g.total ? 'Nenhum erro!' : '');
     show('results');
   }
 
@@ -211,16 +208,10 @@
       const errs = h.stats.wrong;
       const parts = [];
       if (errs) parts.push(`${errs} ${errs === 1 ? 'erro' : 'erros'}`);
-      parts.push(`${secs(h.stats.avgMs)} s${h.slow ? ' (calculando)' : ''}`);
+      parts.push(`${secs(h.stats.avgMs)} s`);
       row.innerHTML = `<span>${gen.describe(h.fact)}</span><small>${parts.join(' · ')}</small>`;
       $('#hardList').appendChild(row);
     });
-
-    const sp = sched.speedProfile();
-    $('#speed').innerHTML = sp.calibrated
-      ? `Seu tempo de lembrar na hora: <b>${secs(sp.baselineMs)} s</b>. ` +
-        `Acertos acima de <b>${secs(sp.fastMs)} s</b> contam como "calculando" e a conta continua aparecendo.`
-      : `Aprendendo seu ritmo (${sp.samples}/12 acertos). Até lá, acertos acima de ${secs(sp.fastMs)} s contam como "calculando".`;
   }
 
   const secs = ms => (ms / 1000).toFixed(1).replace('.', ',');

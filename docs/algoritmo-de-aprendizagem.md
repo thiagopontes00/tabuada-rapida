@@ -69,7 +69,9 @@ O tempo de resposta inclui ler a conta, encontrar a alternativa e tocar nela. Is
 3. **Limite** = 1,8 × referência, entre **1,8 s** e **6 s**.
 4. Até ter **12 acertos**, o limite é fixo em **3,5 s**.
 
-Exemplo: se suas respostas de cor levam uns 1,4 s, o limite fica em ~2,5 s. Uma resposta calculada de ~3 s é marcada como "demorou". Com o antigo limite fixo de 3,5 s, ela passaria despercebida.
+Tudo isso acontece **por dentro**: o jogador não vê "demorou" nem o limite na tela, porque isso frustrava mais do que ajudava ([ADR-0005](adr/0005-limite-de-tempo-pessoal.md), revisão da v0.3.1).
+
+Exemplo: se suas respostas de cor levam uns 1,4 s, o limite fica em ~2,5 s. Uma resposta calculada de ~3 s conta como lenta. Com o antigo limite fixo de 3,5 s, ela passaria despercebida.
 
 **Validação:** na simulação, um jogador que lembra em ~1,4 s e calcula em ~3 s teve **100% das respostas calculadas detectadas**, e nenhuma conta calculada chegou a "de cor".
 

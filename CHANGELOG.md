@@ -6,6 +6,11 @@ O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e 
 
 ## [Não lançado]
 
+## [0.3.1] - 2026-11-24
+
+### Alterado
+- **"Demorou" não aparece mais.** O jogo continua medindo o tempo e tratando acertos lentos como "calculando" por dentro, mas a tela de resultado mostra só os erros, e a tela de progresso não mostra mais o limite de tempo nem o "(calculando)". Ver "demorou" em quase toda rodada era frustrante ([ADR-0005](docs/adr/0005-limite-de-tempo-pessoal.md)).
+
 ## [0.3.0] - 2026-11-23
 
 ### Adicionado
